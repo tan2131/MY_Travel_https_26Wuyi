@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <title>五一江门 · 茂名 · 玉林旅行助手</title>
+  <style>
+    :root {
+      --bg:#f6f8fb; --card:#ffffff; --text:#172033; --muted:#64748b; --line:#e5e7eb;
+      --brand:#0ea5e9; --brand2:#10b981; --warn:#f97316; --danger:#ef4444; --ink:#0f172a;
+      --shadow:0 16px 40px rgba(15,23,42,.08); --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#eaf7ff 0,#f6f8fb 36%,#f6f8fb 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    .wrap{width:min(1120px,calc(100% - 28px));margin:0 auto}
+    header{position:sticky;top:0;z-index:50;background:rgba(246,248,251,.82);backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid rgba(226,232,240,.75)}
+    .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.2px}
+    .logo{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:white;box-shadow:0 10px 25px rgba(14,165,233,.25)}
+    .nav{display:flex;gap:8px;overflow:auto;padding:0 0 10px;scrollbar-width:none}
+    .nav::-webkit-scrollbar{display:none}
+    .nav a{white-space:nowrap;border:1px solid #dbeafe;background:#fff;border-radius:999px;padding:8px 13px;font-size:14px;color:#28536b}
+    .nav a.active,.nav a:hover{background:linear-gradient(135deg,#e0f2fe,#dcfce7);border-color:#7dd3fc;color:#075985}
+    .hero{padding:28px 0 18px}
+    .heroCard{position:relative;overflow:hidden;border-radius:30px;background:radial-gradient(circle at 10% 10%,rgba(255,255,255,.96),rgba(255,255,255,.78) 42%,rgba(240,253,250,.78)),linear-gradient(135deg,#dff6ff,#e6fffa);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.85);padding:28px}
+    .heroCard:after{content:"";position:absolute;right:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:rgba(14,165,233,.13)}
+    .tagline{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(14,165,233,.2);background:#fff;border-radius:999px;padding:7px 12px;color:#0369a1;font-size:14px;margin-bottom:14px}
+    h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 12px;color:#0f172a;letter-spacing:-.03em}
+    .sub{font-size:16px;color:#475569;line-height:1.8;max-width:760px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .btn{border:0;border-radius:15px;padding:11px 15px;cursor:pointer;background:#e2e8f0;color:#0f172a;font-weight:750;display:inline-flex;align-items:center;gap:8px;transition:.15s transform,.15s opacity}
+    .btn:active{transform:scale(.98)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#2563eb);color:#fff}
+    .btn.green{background:linear-gradient(135deg,var(--brand2),#22c55e);color:#fff}
+    .btn.warn{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+    .btn.ghost{background:#fff;color:#334155;border:1px solid var(--line)}
+    .grid{display:grid;gap:16px}
+    .grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    section{padding:18px 0}
+    .secHead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:8px 0 14px}
+    h2{font-size:24px;margin:0;color:#0f172a}
+    .hint{color:var(--muted);font-size:14px;line-height:1.7}
+    .card{background:var(--card);border:1px solid rgba(226,232,240,.9);border-radius:var(--radius);box-shadow:0 10px 26px rgba(15,23,42,.055);padding:18px}
+    .smallCard{padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+    .guideIcon{font-size:30px}
+    .guideTitle{font-weight:900;font-size:18px;margin:6px 0}
+    .guideText{color:#475569;line-height:1.7;font-size:14px}
+    .bullet{margin:10px 0 0;padding-left:18px;color:#475569;font-size:14px;line-height:1.7}
+    .weather{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start}
+    .weatherCity{border-radius:18px;background:linear-gradient(135deg,#dbeafe,#ccfbf1);padding:13px;text-align:center;font-weight:900;color:#075985}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:12px;font-weight:750}
+    .pill.must{background:#fee2e2;color:#991b1b}
+    .pill.key{background:#dcfce7;color:#166534}
+    .pill.train{background:#dbeafe;color:#1d4ed8}
+    .tabs{display:flex;gap:8px;overflow:auto;padding-bottom:4px;margin-bottom:12px}
+    .tab{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;font-weight:800;color:#334155}
+    .tab.active{background:#0f172a;color:#fff;border-color:#0f172a}
+    .filters{display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:12px}
+    .search{border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 14px;outline:none;width:100%}
+    .timeline{position:relative;display:grid;gap:12px}
+    .event{display:grid;grid-template-columns:108px 1fr;gap:12px;position:relative}
+    .timeBox{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center;font-weight:900;color:#075985;min-height:82px;display:grid;place-items:center}
+    .eventBody{border-radius:20px;background:#fff;border:1px solid var(--line);padding:15px;box-shadow:0 10px 22px rgba(15,23,42,.045)}
+    .eventTop{display:flex;justify-content:space-between;gap:8px;align-items:start}
+    .eventTitle{font-size:17px;font-weight:950;color:#0f172a;margin-bottom:5px}
+    .note{color:#475569;line-height:1.65;font-size:14px}
+    .eventMeta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .eventActions,.placeActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .miniBtn{border:1px solid var(--line);background:#f8fafc;border-radius:12px;padding:8px 10px;font-size:13px;font-weight:750;cursor:pointer;color:#334155}
+    .miniBtn.blue{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+    .miniBtn.green{background:#ecfdf5;color:#047857;border-color:#bbf7d0}
+    .miniBtn.orange{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+    .placesGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+    .placeTitle{display:flex;justify-content:space-between;gap:8px;align-items:start;margin-bottom:8px}
+    .placeName{font-size:18px;font-weight:950;color:#0f172a}
+    .placeAddress{color:#64748b;font-size:13px;line-height:1.5}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+    .tag{font-size:12px;border-radius:999px;background:#eef2ff;color:#3730a3;padding:4px 8px;font-weight:750}
+    .checkGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+    .checkItem{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px;cursor:pointer}
+    .checkItem input{margin-top:3px;accent-color:#10b981}
+    .checkItem.done span{text-decoration:line-through;color:#94a3b8}
+    .category{font-size:12px;color:#0369a1;background:#e0f2fe;border-radius:999px;padding:3px 7px;margin-right:6px;font-weight:800}
+    .docDrop{border:2px dashed #bae6fd;border-radius:22px;background:#f0f9ff;padding:18px;text-align:center}
+    .fileList{display:grid;gap:8px;margin-top:12px}
+    .fileItem{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#0f172a;color:#fff;border-radius:999px;padding:11px 16px;z-index:100;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 12px 30px rgba(15,23,42,.22);max-width:min(92vw,540px);text-align:center}
+    .toast.show{opacity:1;bottom:36px}
+    .footer{padding:30px 0 44px;color:#64748b;text-align:center;font-size:13px}
+    .qrBox{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start}
+    .qrPreview{display:grid;place-items:center;background:#f8fafc;border:1px solid var(--line);border-radius:18px;min-height:260px;overflow:hidden}
+    .qrPreview img{max-width:240px;max-height:240px}
+    .mapFrame{height:360px;border:0;border-radius:20px;background:#e2e8f0;width:100%}
+    @media (max-width:780px){
+      .topbar{height:auto;padding:12px 0 8px;align-items:flex-start;flex-direction:column}
+      .heroCard{padding:22px}
+      .grid2,.grid3,.qrBox{grid-template-columns:1fr}
+      .event{grid-template-columns:1fr}
+      .timeBox{min-height:auto;text-align:left;justify-content:start}
+      .filters{grid-template-columns:1fr}
+      .secHead{align-items:start;flex-direction:column}
+      .actions .btn{flex:1;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand"><div class="logo">旅</div><div><div>五一旅行助手</div><div class="hint">江门 → 茂名 → 玉林</div></div></div>
+    <div class="hint">离线静态网页 · 可上传到 GitHub / Netlify / Cloudflare Pages</div>
+  </div>
+  <div class="wrap nav" id="nav">
+    <a href="#home" class="active">首页</a><a href="#schedule">行程</a><a href="#places">地点导航</a><a href="#checklist">清单</a><a href="#docs">导入攻略</a><a href="#return">返程</a><a href="#publish">发布与二维码</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="home" class="hero">
+    <div class="heroCard">
+      <div class="tagline">🌊 2026 五一专属攻略 · 可手机打开</div>
+      <h1 id="title"></h1>
+      <div class="sub" id="subtitle"></div>
+      <div class="actions">
+        <button class="btn primary" onclick="downloadAllIcs()">⏰ 下载全程日历提醒</button>
+        <button class="btn green" onclick="copyHotelText()">🏨 复制酒店确认话术</button>
+        <a class="btn ghost" href="#schedule">📅 查看行程</a>
+        <a class="btn warn" href="#places">🧭 打开地点导航</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid grid2" id="weatherBox"></div>
+  </section>
+
+  <section>
+    <div class="secHead"><div><h2>核心提醒</h2><div class="hint">根据你的攻略整理成旅行时能快速看的卡片。</div></div></div>
+    <div class="grid grid2" id="guideCards"></div>
+  </section>
+
+  <section id="schedule">
+    <div class="secHead"><div><h2>行程时间线</h2><div class="hint">可以按日期筛选；每条行程可下载日历提醒，也可以跳到地点导航。</div></div><button class="btn ghost" onclick="downloadAllIcs()">下载全部提醒</button></div>
+    <div class="tabs" id="dayTabs"></div>
+    <div class="filters"><input id="eventSearch" class="search" placeholder="搜索：日出、赶海、酒店、K949、云天文化城……" oninput="renderEvents()"/><button class="btn ghost" onclick="clearSearch()">清空</button></div>
+    <div class="timeline" id="eventsBox"></div>
+  </section>
+
+  <section id="places">
+    <div class="secHead"><div><h2>地点攻略与地图导航</h2><div class="hint">网页无法像小程序那样直接调微信地图，但可以打开腾讯地图/高德地图链接，或复制地点名。</div></div></div>
+    <div class="filters"><input id="placeSearch" class="search" placeholder="搜索地点/城市/标签：茂名、玉林、海鲜、酒店……" oninput="renderPlaces()"/><select id="cityFilter" class="search" onchange="renderPlaces()"><option value="">全部城市</option></select></div>
+    <div class="placesGrid" id="placesBox"></div>
+  </section>
+
+  <section id="checklist">
+    <div class="secHead"><div><h2>出发前检查清单</h2><div class="hint">勾选状态会保存在当前浏览器里。换手机或清缓存后需要重新勾选。</div></div><button class="btn ghost" onclick="resetChecklist()">重置清单</button></div>
+    <div class="checkGrid" id="checklistBox"></div>
+  </section>
+
+  <section id="docs">
+    <div class="secHead"><div><h2>导入文档攻略</h2><div class="hint">可以把 Word / Excel / PDF 存在当前浏览器本地数据库里，方便旅行时从网页入口打开或下载；不会上传到服务器。</div></div></div>
+    <div class="docDrop">
+      <p style="font-weight:900;margin-top:0">把攻略文件导入到本页面</p>
+      <input type="file" id="docInput" multiple accept=".doc,.docx,.pdf,.xls,.xlsx,.txt,.md" onchange="saveDocs(this.files)" />
+      <p class="hint">提示：iPhone/微信内置浏览器对下载和打开本地文件有限制，建议同时把攻略文件发到微信收藏或文件传输助手。</p>
+    </div>
+    <div class="fileList" id="fileList"></div>
+  </section>
+
+  <section id="return">
+    <div class="secHead"><div><h2>返程方案</h2><div class="hint">返程高峰不要卡点，最终以你买到的车票为准。</div></div></div>
+    <div class="grid grid3" id="returnPlans"></div>
+  </section>
+
+  <section id="publish">
+    <div class="secHead"><div><h2>发布与二维码</h2><div class="hint">上传到静态网站平台后，把生成的网址粘贴到这里，可以临时生成二维码给同行扫码。</div></div></div>
+    <div class="card qrBox">
+      <div>
+        <h3 style="margin-top:0">网址转二维码</h3>
+        <p class="note">先把本文件夹发布成网址，再把网址粘贴进下面输入框。二维码图片由公开二维码接口生成；如果打不开，也可以把网址发给我，我帮你生成二维码图片。</p>
+        <input id="qrInput" class="search" placeholder="粘贴你的网页网址，例如 https://xxx.netlify.app" oninput="makeQr()" />
+        <div class="actions"><button class="btn primary" onclick="makeQr()">生成二维码</button><button class="btn ghost" onclick="copyCurrentUrl()">复制当前页面地址</button></div>
+        <p class="hint">如果只是自己和同行使用，最推荐 Netlify Drop 或 Cloudflare Pages 直接拖拽上传。</p>
+      </div>
+      <div class="qrPreview" id="qrPreview">等待粘贴网址</div>
+    </div>
+  </section>
+
+  <div class="footer">本页面为静态旅行助手，不保存到服务器。出行前请再次确认天气、潮汐、车票、酒店和景区开放情况。</div>
+</main>
+<div id="toast" class="toast"></div>
+
+<script>
+const DATA = {"tripMeta": {"title": "五一江门 · 茂名 · 玉林旅行助手", "subtitle": "看海日出｜晏镜岭｜玉林市区吃喝｜5月1日—5月3日", "people": "同行专属行程", "dateRange": "2026.05.01 - 2026.05.03", "sourceNote": "已根据你上传的 Word 攻略和 Excel 行程表整理，并补充地点导航与提醒功能。", "emergencyNote": "出发前再次确认车票、酒店、天气、景区开放和返程票。"}, "weatherTips": [{"city": "茂名", "date": "5月1日", "summary": "夜间到清晨约18-21℃，白天约24-27℃，以晴到多云为主。", "tips": ["凌晨海边有风，带薄外套。", "白天海边晒，带伞或帽子。", "赶海仍以潮汐和现场浪况为准。"]}, {"city": "玉林", "date": "5月2日-5月3日", "summary": "可能有阵雨或雷雨，气温大致在19-30℃区间浮动。", "tips": ["雨伞/一次性雨衣一定带。", "云天文化城可根据雨势改为外观拍照或市区室内休息。", "返程日不要跑远。"]}], "places": [{"id": "jiangmenStation", "name": "江门站", "city": "江门", "category": "station", "tags": ["出发"], "address": "广东省江门市新会区", "latitude": null, "longitude": null, "bestTime": "5月1日 00:32前", "reason": "C7159 江门 → 茂名出发点。", "guide": ["提前进站，不要卡点。", "身份证、充电宝、车票信息提前检查。"], "mapKeyword": "江门站"}, {"id": "maomingStation", "name": "茂名站", "city": "茂名", "category": "station", "tags": ["到达", "换乘"], "address": "广东省茂名市茂南区站前大道/站北四路", "latitude": 21.642552, "longitude": 110.929079, "bestTime": "5月1日 02:07 到达；20:30前回站", "reason": "凌晨到达后去海边，晚上乘 K949 去玉林。", "guide": ["到站后先上厕所、洗漱、买水。", "凌晨不要坐黑车，优先网约车。", "晚上 K949 不要卡点，建议20:30前到站。"], "mapKeyword": "茂名站"}, {"id": "firstBeach", "name": "中国第一滩 / 虎头山", "city": "茂名", "category": "scenic", "tags": ["看海", "日出", "安全主入口"], "address": "广东省茂名市电白区南海街道海滨二路", "latitude": 21.455184, "longitude": 111.052838, "bestTime": "5月1日 03:20-06:40", "reason": "凌晨看海和等天亮更安全，适合拍海边日出、沙滩和“小镰仓”氛围。", "guide": ["找有灯、有店、人多的位置。", "不要下海，不要去偏僻沙滩。", "五一人可能多，保管好随身物品。"], "mapKeyword": "中国第一滩旅游度假区"}, {"id": "yanjingling", "name": "晏镜岭", "city": "茂名", "category": "scenic", "tags": ["山海", "拍照", "步道"], "address": "广东省茂名市电白区南海旅游岛附近", "latitude": 21.425059, "longitude": 110.99738, "bestTime": "5月1日 11:00-12:30 或下午赶海前后", "reason": "山海视角、礁石、海岸线更符合这次旅行重点。", "guide": ["穿运动鞋，不穿拖鞋上山。", "不要走野路去灯塔。", "风大浪大时不要靠近礁石边缘。"], "mapKeyword": "晏镜岭"}, {"id": "tongziwan", "name": "童子湾", "city": "茂名", "category": "scenic", "tags": ["渔港", "滩涂", "轻度赶海"], "address": "广东省茂名市电白区晏镜岭西侧", "latitude": 21.4238, "longitude": 110.9888, "bestTime": "5月1日 13:30-16:30", "reason": "适合看滩涂、渔船和轻度赶海体验。", "guide": ["赶海窗口以12:42-16:42为参考。", "只做轻度体验，不追求收获。", "涨潮、雷雨、大风、浪大时立即取消。"], "mapKeyword": "童子湾"}, {"id": "danjiaxu", "name": "疍家墟 / 塘霞俚街", "city": "茂名", "category": "scenic", "tags": ["顺路", "拍照", "轻逛"], "address": "茂名市电白区南海旅游岛一带", "latitude": 21.4595, "longitude": 111.0488, "bestTime": "5月1日 09:00-11:00", "reason": "从中国第一滩顺路轻逛，不用额外跑远。", "guide": ["只作为顺路补充，不要为了它打乱午休。", "人多时简单拍照即可。"], "mapKeyword": "疍家墟"}, {"id": "chenCunSeafood", "name": "陈村海鲜一条街 / 大天然海鲜街", "city": "茂名", "category": "food", "tags": ["海鲜", "大排档", "晚饭"], "address": "广东省茂名市电白区陈村街道陈村海鲜一条街", "latitude": null, "longitude": null, "bestTime": "5月1日 17:00-19:00", "reason": "适合自己挑海鲜、称重后加工，更像你想要的自助大排档模式。", "guide": ["先问斤价、加工费、是否按只/按斤。", "称重看篮子是否沥水。", "不明码标价不吃，两个人少点，宁可不够再加。"], "mapKeyword": "陈村海鲜一条街"}, {"id": "xingjiDuck", "name": "水东兴记鸭粥店", "city": "茂名", "category": "food", "tags": ["鸭粥", "稳妥", "备选"], "address": "茂名市新福二路3号附近", "latitude": null, "longitude": null, "bestTime": "5月1日 午饭或晚饭备选", "reason": "不想吃海鲜或怕被宰时更稳。", "guide": ["适合鸭粥、鸭肉、鸭杂、捞粉。", "环境普通但本地味更强。"], "mapKeyword": "水东兴记鸭粥店 茂名"}, {"id": "yulinStation", "name": "玉林站", "city": "玉林", "category": "station", "tags": ["到达", "返程"], "address": "广西壮族自治区玉林市玉州区中秀路168号", "latitude": 22.597307, "longitude": 110.156932, "bestTime": "5月2日 00:39 到达；返程按车次提前到", "reason": "K949 到达点，也是返程保底点之一。", "guide": ["凌晨到站后直接网约车去酒店。", "不要在车站逗留太久。", "返程高峰提前到站。"], "mapKeyword": "玉林站"}, {"id": "hotel", "name": "欢朋时尚酒店（玉林汽车总站店）", "city": "玉林", "category": "hotel", "tags": ["住宿", "必须确认"], "address": "广西壮族自治区玉林市玉州区玉州教育西路102号", "latitude": null, "longitude": null, "bestTime": "5月2日 01:00左右入住", "reason": "5月1日—5月3日两晚，凌晨到店必须提前联系保留房间。", "guide": ["现在就联系酒店：我们5月2日凌晨1点左右到店，请帮忙保留房间。", "如果平台显示确认中，必须催确认。", "退房后可询问前台是否能寄存行李。"], "mapKeyword": "欢朋时尚酒店 玉林汽车总站店"}, {"id": "yuntian", "name": "云天文化城 / 云天宫", "city": "玉林", "category": "scenic", "tags": ["地标", "拍照", "门票视预算"], "address": "广西玉林市玉州区江滨路461号", "latitude": 22.623401, "longitude": 110.164916, "bestTime": "5月2日 12:30-15:30", "reason": "玉林代表性建筑，适合拍照。门票可能偏贵，可先外观拍照再决定是否入内。", "guide": ["预算紧可先在外面拍建筑外观。", "如果下雨，可缩短为外观打卡+市区室内休息。", "预留2小时左右即可，不建议拖太久。"], "mapKeyword": "云天文化城"}, {"id": "crossStreet", "name": "玉林十字街夜市", "city": "玉林", "category": "food", "tags": ["夜市", "小吃", "商圈"], "address": "广西壮族自治区玉林市玉州区人民中路2-24附近", "latitude": 22.6328, "longitude": 110.1545, "bestTime": "5月2日 18:00-22:00", "reason": "市区吃喝集中，适合睡醒后慢慢逛和吃。", "guide": ["吃牛巴、牛杂、卷筒粉、糖水、酸嘢。", "优先找明码标价、本地人多、近1个月有评价的店。"], "mapKeyword": "玉林十字街夜市"}, {"id": "waterStreet", "name": "玉林水街", "city": "玉林", "category": "food", "tags": ["美食街", "夜逛", "备选"], "address": "广西壮族自治区玉林市玉州区本草健康小镇内", "latitude": null, "longitude": null, "bestTime": "5月2日 晚上备选", "reason": "水街有本地小吃和夜间氛围，可和十字街二选一。", "guide": ["不建议两边都硬赶，选择离酒店/打车更方便的一边。", "雨大就改商场或酒店附近吃饭。"], "mapKeyword": "玉林水街"}, {"id": "wucaiTianyuan", "name": "五彩田园", "city": "玉林", "category": "scenic", "tags": ["返程前", "轻松逛", "备选"], "address": "广西玉林市玉州区荔枝大道与环西路交叉口东300米附近", "latitude": 22.6649, "longitude": 110.2185, "bestTime": "5月3日 12:30-14:30", "reason": "返程前的轻松备选，不建议跑远郊。", "guide": ["只适合坐晚车或时间充足时。", "雨天可改商圈/咖啡店。", "返程前务必先拿行李并提前到站。"], "mapKeyword": "五彩田园"}], "placeMap": {"jiangmenStation": {"id": "jiangmenStation", "name": "江门站", "city": "江门", "category": "station", "tags": ["出发"], "address": "广东省江门市新会区", "latitude": null, "longitude": null, "bestTime": "5月1日 00:32前", "reason": "C7159 江门 → 茂名出发点。", "guide": ["提前进站，不要卡点。", "身份证、充电宝、车票信息提前检查。"], "mapKeyword": "江门站"}, "maomingStation": {"id": "maomingStation", "name": "茂名站", "city": "茂名", "category": "station", "tags": ["到达", "换乘"], "address": "广东省茂名市茂南区站前大道/站北四路", "latitude": 21.642552, "longitude": 110.929079, "bestTime": "5月1日 02:07 到达；20:30前回站", "reason": "凌晨到达后去海边，晚上乘 K949 去玉林。", "guide": ["到站后先上厕所、洗漱、买水。", "凌晨不要坐黑车，优先网约车。", "晚上 K949 不要卡点，建议20:30前到站。"], "mapKeyword": "茂名站"}, "firstBeach": {"id": "firstBeach", "name": "中国第一滩 / 虎头山", "city": "茂名", "category": "scenic", "tags": ["看海", "日出", "安全主入口"], "address": "广东省茂名市电白区南海街道海滨二路", "latitude": 21.455184, "longitude": 111.052838, "bestTime": "5月1日 03:20-06:40", "reason": "凌晨看海和等天亮更安全，适合拍海边日出、沙滩和“小镰仓”氛围。", "guide": ["找有灯、有店、人多的位置。", "不要下海，不要去偏僻沙滩。", "五一人可能多，保管好随身物品。"], "mapKeyword": "中国第一滩旅游度假区"}, "yanjingling": {"id": "yanjingling", "name": "晏镜岭", "city": "茂名", "category": "scenic", "tags": ["山海", "拍照", "步道"], "address": "广东省茂名市电白区南海旅游岛附近", "latitude": 21.425059, "longitude": 110.99738, "bestTime": "5月1日 11:00-12:30 或下午赶海前后", "reason": "山海视角、礁石、海岸线更符合这次旅行重点。", "guide": ["穿运动鞋，不穿拖鞋上山。", "不要走野路去灯塔。", "风大浪大时不要靠近礁石边缘。"], "mapKeyword": "晏镜岭"}, "tongziwan": {"id": "tongziwan", "name": "童子湾", "city": "茂名", "category": "scenic", "tags": ["渔港", "滩涂", "轻度赶海"], "address": "广东省茂名市电白区晏镜岭西侧", "latitude": 21.4238, "longitude": 110.9888, "bestTime": "5月1日 13:30-16:30", "reason": "适合看滩涂、渔船和轻度赶海体验。", "guide": ["赶海窗口以12:42-16:42为参考。", "只做轻度体验，不追求收获。", "涨潮、雷雨、大风、浪大时立即取消。"], "mapKeyword": "童子湾"}, "danjiaxu": {"id": "danjiaxu", "name": "疍家墟 / 塘霞俚街", "city": "茂名", "category": "scenic", "tags": ["顺路", "拍照", "轻逛"], "address": "茂名市电白区南海旅游岛一带", "latitude": 21.4595, "longitude": 111.0488, "bestTime": "5月1日 09:00-11:00", "reason": "从中国第一滩顺路轻逛，不用额外跑远。", "guide": ["只作为顺路补充，不要为了它打乱午休。", "人多时简单拍照即可。"], "mapKeyword": "疍家墟"}, "chenCunSeafood": {"id": "chenCunSeafood", "name": "陈村海鲜一条街 / 大天然海鲜街", "city": "茂名", "category": "food", "tags": ["海鲜", "大排档", "晚饭"], "address": "广东省茂名市电白区陈村街道陈村海鲜一条街", "latitude": null, "longitude": null, "bestTime": "5月1日 17:00-19:00", "reason": "适合自己挑海鲜、称重后加工，更像你想要的自助大排档模式。", "guide": ["先问斤价、加工费、是否按只/按斤。", "称重看篮子是否沥水。", "不明码标价不吃，两个人少点，宁可不够再加。"], "mapKeyword": "陈村海鲜一条街"}, "xingjiDuck": {"id": "xingjiDuck", "name": "水东兴记鸭粥店", "city": "茂名", "category": "food", "tags": ["鸭粥", "稳妥", "备选"], "address": "茂名市新福二路3号附近", "latitude": null, "longitude": null, "bestTime": "5月1日 午饭或晚饭备选", "reason": "不想吃海鲜或怕被宰时更稳。", "guide": ["适合鸭粥、鸭肉、鸭杂、捞粉。", "环境普通但本地味更强。"], "mapKeyword": "水东兴记鸭粥店 茂名"}, "yulinStation": {"id": "yulinStation", "name": "玉林站", "city": "玉林", "category": "station", "tags": ["到达", "返程"], "address": "广西壮族自治区玉林市玉州区中秀路168号", "latitude": 22.597307, "longitude": 110.156932, "bestTime": "5月2日 00:39 到达；返程按车次提前到", "reason": "K949 到达点，也是返程保底点之一。", "guide": ["凌晨到站后直接网约车去酒店。", "不要在车站逗留太久。", "返程高峰提前到站。"], "mapKeyword": "玉林站"}, "hotel": {"id": "hotel", "name": "欢朋时尚酒店（玉林汽车总站店）", "city": "玉林", "category": "hotel", "tags": ["住宿", "必须确认"], "address": "广西壮族自治区玉林市玉州区玉州教育西路102号", "latitude": null, "longitude": null, "bestTime": "5月2日 01:00左右入住", "reason": "5月1日—5月3日两晚，凌晨到店必须提前联系保留房间。", "guide": ["现在就联系酒店：我们5月2日凌晨1点左右到店，请帮忙保留房间。", "如果平台显示确认中，必须催确认。", "退房后可询问前台是否能寄存行李。"], "mapKeyword": "欢朋时尚酒店 玉林汽车总站店"}, "yuntian": {"id": "yuntian", "name": "云天文化城 / 云天宫", "city": "玉林", "category": "scenic", "tags": ["地标", "拍照", "门票视预算"], "address": "广西玉林市玉州区江滨路461号", "latitude": 22.623401, "longitude": 110.164916, "bestTime": "5月2日 12:30-15:30", "reason": "玉林代表性建筑，适合拍照。门票可能偏贵，可先外观拍照再决定是否入内。", "guide": ["预算紧可先在外面拍建筑外观。", "如果下雨，可缩短为外观打卡+市区室内休息。", "预留2小时左右即可，不建议拖太久。"], "mapKeyword": "云天文化城"}, "crossStreet": {"id": "crossStreet", "name": "玉林十字街夜市", "city": "玉林", "category": "food", "tags": ["夜市", "小吃", "商圈"], "address": "广西壮族自治区玉林市玉州区人民中路2-24附近", "latitude": 22.6328, "longitude": 110.1545, "bestTime": "5月2日 18:00-22:00", "reason": "市区吃喝集中，适合睡醒后慢慢逛和吃。", "guide": ["吃牛巴、牛杂、卷筒粉、糖水、酸嘢。", "优先找明码标价、本地人多、近1个月有评价的店。"], "mapKeyword": "玉林十字街夜市"}, "waterStreet": {"id": "waterStreet", "name": "玉林水街", "city": "玉林", "category": "food", "tags": ["美食街", "夜逛", "备选"], "address": "广西壮族自治区玉林市玉州区本草健康小镇内", "latitude": null, "longitude": null, "bestTime": "5月2日 晚上备选", "reason": "水街有本地小吃和夜间氛围，可和十字街二选一。", "guide": ["不建议两边都硬赶，选择离酒店/打车更方便的一边。", "雨大就改商场或酒店附近吃饭。"], "mapKeyword": "玉林水街"}, "wucaiTianyuan": {"id": "wucaiTianyuan", "name": "五彩田园", "city": "玉林", "category": "scenic", "tags": ["返程前", "轻松逛", "备选"], "address": "广西玉林市玉州区荔枝大道与环西路交叉口东300米附近", "latitude": 22.6649, "longitude": 110.2185, "bestTime": "5月3日 12:30-14:30", "reason": "返程前的轻松备选，不建议跑远郊。", "guide": ["只适合坐晚车或时间充足时。", "雨天可改商圈/咖啡店。", "返程前务必先拿行李并提前到站。"], "mapKeyword": "五彩田园"}}, "days": [{"id": "2026-05-01", "label": "5月1日", "title": "茂名看海日出 + 晏镜岭 + 晚上去玉林"}, {"id": "2026-05-02", "label": "5月2日", "title": "玉林睡够 + 云天文化城 + 夜市吃喝"}, {"id": "2026-05-03", "label": "5月3日", "title": "轻松返程前安排"}], "events": [{"id": "e010032", "day": "2026-05-01", "time": "00:32-02:07", "startISO": "2026-05-01T00:32:00+08:00", "endISO": "2026-05-01T02:07:00+08:00", "title": "江门 → 茂名 C7159", "type": "train", "status": "已买", "placeId": "jiangmenStation", "nextPlaceId": "maomingStation", "cost": "142元/人", "note": "到站后别久留车站，准备网约车去海边。", "alarmMinutes": 45}, {"id": "e010220", "day": "2026-05-01", "time": "02:20-03:10", "startISO": "2026-05-01T02:20:00+08:00", "endISO": "2026-05-01T03:10:00+08:00", "title": "茂名站 → 中国第一滩", "type": "transport", "status": "执行", "placeId": "maomingStation", "nextPlaceId": "firstBeach", "cost": "网约车/出租车", "note": "选主入口、有灯、有店铺的区域等日出；不要坐黑车。", "alarmMinutes": 15}, {"id": "e010320", "day": "2026-05-01", "time": "03:20-06:40", "startISO": "2026-05-01T03:20:00+08:00", "endISO": "2026-05-01T06:40:00+08:00", "title": "海边等天亮、看日出", "type": "scenic", "status": "重点", "placeId": "firstBeach", "cost": "免费", "note": "凌晨只在安全区域看海，不下海，不走偏僻沙滩。", "alarmMinutes": 20}, {"id": "e010700", "day": "2026-05-01", "time": "07:00-08:30", "startISO": "2026-05-01T07:00:00+08:00", "endISO": "2026-05-01T08:30:00+08:00", "title": "海边/水东早餐", "type": "food", "status": "吃饭", "placeId": "firstBeach", "cost": "约15-30元/人", "note": "簸箕炊、捞粉、海鲜粥都可以，通宵后不要空腹硬走。", "alarmMinutes": 15}, {"id": "e010900", "day": "2026-05-01", "time": "09:00-11:00", "startISO": "2026-05-01T09:00:00+08:00", "endISO": "2026-05-01T11:00:00+08:00", "title": "中国第一滩、疍家墟、塘霞俚街轻逛", "type": "scenic", "status": "轻游", "placeId": "danjiaxu", "cost": "按距离打车/步行", "note": "顺路拍照，不要暴走，为午休留体力。", "alarmMinutes": 20}, {"id": "e011100", "day": "2026-05-01", "time": "11:00-12:30", "startISO": "2026-05-01T11:00:00+08:00", "endISO": "2026-05-01T12:30:00+08:00", "title": "晏镜岭看山海视角", "type": "scenic", "status": "轻游", "placeId": "yanjingling", "cost": "网约车/出租车", "note": "天亮后去更安全，适合拍海岸线；穿运动鞋。", "alarmMinutes": 20}, {"id": "e011330", "day": "2026-05-01", "time": "13:30-16:30", "startISO": "2026-05-01T13:30:00+08:00", "endISO": "2026-05-01T16:30:00+08:00", "title": "轻度赶海/礁石滩观察", "type": "scenic", "status": "潮汐窗口", "placeId": "tongziwan", "cost": "低成本", "note": "推荐参考赶海窗口12:42-16:42；风浪大或雷雨直接取消。", "alarmMinutes": 30}, {"id": "e011700", "day": "2026-05-01", "time": "17:00-19:00", "startISO": "2026-05-01T17:00:00+08:00", "endISO": "2026-05-01T19:00:00+08:00", "title": "茂名晚饭：海鲜或鸭粥", "type": "food", "status": "吃饭", "placeId": "chenCunSeafood", "cost": "约30-80元/人", "note": "海鲜先问价、称重、加工费；不想吃海鲜可去水东兴记鸭粥。", "alarmMinutes": 20}, {"id": "e012030", "day": "2026-05-01", "time": "20:30前", "startISO": "2026-05-01T20:30:00+08:00", "endISO": "2026-05-01T21:00:00+08:00", "title": "到茂名站候车", "type": "station", "status": "必须", "placeId": "maomingStation", "cost": "预留进站时间", "note": "K字头提前到站更安心，不要卡点。", "alarmMinutes": 45}, {"id": "e012120", "day": "2026-05-01", "time": "21:20-00:39+1", "startISO": "2026-05-01T21:20:00+08:00", "endISO": "2026-05-02T00:39:00+08:00", "title": "茂名 → 玉林 K949", "type": "train", "status": "已买", "placeId": "maomingStation", "nextPlaceId": "yulinStation", "cost": "28.5元/人", "note": "到玉林是5月2日凌晨，直接打车去酒店。", "alarmMinutes": 45}, {"id": "e020050", "day": "2026-05-02", "time": "00:50-01:20", "startISO": "2026-05-02T00:50:00+08:00", "endISO": "2026-05-02T01:20:00+08:00", "title": "玉林站 → 酒店", "type": "transport", "status": "入住", "placeId": "yulinStation", "nextPlaceId": "hotel", "cost": "网约车/出租车", "note": "提前打电话给酒店：凌晨1点左右到，请保留房间。", "alarmMinutes": 10}, {"id": "e021030", "day": "2026-05-02", "time": "10:30-12:00", "startISO": "2026-05-02T10:30:00+08:00", "endISO": "2026-05-02T12:00:00+08:00", "title": "玉林早午饭", "type": "food", "status": "吃饭", "placeId": "crossStreet", "cost": "约15-30元/人", "note": "生料粉、牛巴粉、牛腩粉、卷粉，就近选评分高且营业中的店。", "alarmMinutes": 30}, {"id": "e021230", "day": "2026-05-02", "time": "12:30-15:30", "startISO": "2026-05-02T12:30:00+08:00", "endISO": "2026-05-02T15:30:00+08:00", "title": "云天文化城 / 云天宫", "type": "scenic", "status": "景点", "placeId": "yuntian", "cost": "门票视情况", "note": "想拍建筑可进去；嫌贵或下雨就外观拍照。", "alarmMinutes": 30}, {"id": "e021800", "day": "2026-05-02", "time": "18:00-22:00", "startISO": "2026-05-02T18:00:00+08:00", "endISO": "2026-05-02T22:00:00+08:00", "title": "玉林水街 / 十字街夜市", "type": "food", "status": "重点", "placeId": "crossStreet", "cost": "约40-80元/人", "note": "牛巴、牛杂、卷筒粉、糖水、酸嘢；别为了网红店排太久。", "alarmMinutes": 30}, {"id": "e030930", "day": "2026-05-03", "time": "09:30-11:00", "startISO": "2026-05-03T09:30:00+08:00", "endISO": "2026-05-03T11:00:00+08:00", "title": "起床、退房、寄存行李", "type": "hotel", "status": "收拾", "placeId": "hotel", "cost": "酒店前台", "note": "先确认能否寄存行李，检查身份证、充电器、车票。", "alarmMinutes": 45}, {"id": "e031100", "day": "2026-05-03", "time": "11:00-15:30", "startISO": "2026-05-03T11:00:00+08:00", "endISO": "2026-05-03T15:30:00+08:00", "title": "返程前轻松逛：五彩田园/商圈二选一", "type": "scenic", "status": "推荐", "placeId": "wucaiTianyuan", "cost": "打车/门票视情况", "note": "坐晚车才考虑；下雨或时间紧就改商圈/酒店附近。", "alarmMinutes": 30}, {"id": "e031530", "day": "2026-05-03", "time": "15:30后", "startISO": "2026-05-03T15:30:00+08:00", "endISO": "2026-05-03T16:30:00+08:00", "title": "回酒店拿行李，提前到站/客运站", "type": "transport", "status": "返程", "placeId": "hotel", "cost": "按返程方案", "note": "返程高峰不要卡点，任何方案至少提前1小时到站。", "alarmMinutes": 60}], "guideCards": [{"id": "core", "title": "核心玩法", "icon": "🌊", "content": "茂名不要打卡全市，重点放在中国第一滩看海天亮、晏镜岭/童子湾山海与轻度赶海；玉林不要跑远，睡够、吃好、看一个代表性景点。", "bullets": ["茂名：看海 + 晏镜岭 + 下午赶海 + 晚上火车。", "玉林：睡醒 + 云天文化城 + 夜市/商圈。", "5月3日：轻松逛 + 拿行李 + 返程。"]}, {"id": "tide", "title": "赶海提醒", "icon": "🪣", "content": "5月1日更建议下午退潮窗口轻度体验，凌晨更适合看海边天亮，不建议深入礁石。", "bullets": ["参考窗口：12:42-16:42。", "风浪大、雷雨、大风，直接取消。", "不要摸不认识的海洋生物。"]}, {"id": "seafood", "title": "海鲜避坑", "icon": "🦐", "content": "去海鲜街/大排档先问价，能控制预算再点。", "bullets": ["问清斤价 + 加工费 + 是否按只/按斤。", "称重时看篮子是否沥水。", "两个人少点，宁可不够再加。"]}, {"id": "hotel", "title": "酒店必须确认", "icon": "🏨", "content": "你们5月2日凌晨才到玉林，但订单是5月1日入住，必须提前联系酒店保留房间。", "bullets": ["话术：我们5月2日凌晨1点左右到店，请帮忙保留房间，不要取消。", "平台若仍显示确认中，要马上催确认。"]}], "checklist": [{"id": "idcard", "category": "证件", "text": "身份证、学生证/证件"}, {"id": "tickets", "category": "交通", "text": "确认 C7159、K949、返程方案"}, {"id": "hotelcall", "category": "住宿", "text": "提前联系玉林酒店保留凌晨入住房间"}, {"id": "powerbank", "category": "电子", "text": "充电宝、充电器、数据线"}, {"id": "mapoffline", "category": "导航", "text": "提前收藏：中国第一滩、晏镜岭、茂名站、玉林站、酒店"}, {"id": "jacket", "category": "衣物", "text": "薄外套，凌晨海边和夜车会冷"}, {"id": "rain", "category": "天气", "text": "雨伞/一次性雨衣"}, {"id": "mosquito", "category": "户外", "text": "防蚊用品、纸巾、湿巾"}, {"id": "sea", "category": "安全", "text": "海边不下水，不站浪边/礁石/堤坝边缘"}, {"id": "tide", "category": "赶海", "text": "小桶/袋子、夹子、小铲子、手套、防滑鞋"}, {"id": "food", "category": "吃饭", "text": "海鲜先问价、称重、加工费"}, {"id": "return", "category": "返程", "text": "5月3日返程高峰，至少提前1小时到站"}], "returnPlans": [{"title": "首选：玉林 → 茂名西 → 江门", "route": "5月3日 K951 玉林21:22 → 茂名西00:19；5月4日 D3822 茂名07:20 → 江门08:55", "cost": "约178.5元/人 + 市内交通", "note": "注意茂名西和茂名站不是同一个站。"}, {"title": "更省钱：玉林 → 广州 → 江门", "route": "5月3日 K951 玉林21:22 → 广州06:13；广州南 → 江门", "cost": "约131-134元/人 + 地铁费", "note": "如果只剩无座，不建议一路站到广州。"}, {"title": "顺风车直达", "route": "玉林 → 江门/新会/鹤山", "cost": "两人合计400-500元内可接受", "note": "只走平台订单，不私下转账。"}]};
+const PLACE_MAP = Object.fromEntries(DATA.places.map(p => [p.id, p]));
+let currentDay = DATA.days[0].id;
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window.__toast); window.__toast=setTimeout(()=>t.classList.remove('show'),2200); }
+function copyText(text){ navigator.clipboard?.writeText(text).then(()=>toast('已复制')).catch(()=>{ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast('已复制'); }); }
+
+function init(){
+  $('title').textContent = DATA.tripMeta.title;
+  $('subtitle').innerHTML = `${esc(DATA.tripMeta.subtitle)}<br>${esc(DATA.tripMeta.sourceNote)}<br><b>${esc(DATA.tripMeta.emergencyNote)}</b>`;
+  renderWeather(); renderGuides(); renderDayTabs(); renderEvents(); renderCities(); renderPlaces(); renderChecklist(); renderReturnPlans(); renderDocs(); initNavSpy();
+}
+function renderWeather(){
+  $('weatherBox').innerHTML = DATA.weatherTips.map(w => `<div class="card weather"><div class="weatherCity">${esc(w.city)}<br><span style="font-size:12px;color:#0e7490">${esc(w.date)}</span></div><div><div class="guideText">${esc(w.summary)}</div><ul class="bullet">${w.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`).join('');
+}
+function renderGuides(){
+  $('guideCards').innerHTML = DATA.guideCards.map(g => `<div class="card"><div class="guideIcon">${esc(g.icon)}</div><div class="guideTitle">${esc(g.title)}</div><div class="guideText">${esc(g.content)}</div><ul class="bullet">${g.bullets.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('');
+}
+function renderDayTabs(){
+  $('dayTabs').innerHTML = DATA.days.map(d => `<button class="tab ${d.id===currentDay?'active':''}" onclick="currentDay='${d.id}';renderDayTabs();renderEvents();">${esc(d.label)} · ${esc(d.title)}</button>`).join('');
+}
+function clearSearch(){ $('eventSearch').value=''; renderEvents(); }
+function badgeClass(status,type){ if(['必须','重点','潮汐窗口'].includes(status)) return 'must'; if(type==='train') return 'train'; if(['执行','入住','景点','推荐'].includes(status)) return 'key'; return ''; }
+function renderEvents(){
+  const q = $('eventSearch').value.trim().toLowerCase();
+  let list = DATA.events.filter(e => e.day === currentDay);
+  if(q) list = list.filter(e => [e.title,e.note,e.time,e.status,e.cost,PLACE_MAP[e.placeId]?.name,PLACE_MAP[e.placeId]?.city].join(' ').toLowerCase().includes(q));
+  $('eventsBox').innerHTML = list.map(e => {
+    const p=PLACE_MAP[e.placeId] || {}; const np=PLACE_MAP[e.nextPlaceId] || null;
+    return `<div class="event"><div class="timeBox">${esc(e.time)}</div><div class="eventBody"><div class="eventTop"><div><div class="eventTitle">${esc(e.title)}</div><div class="hint">📍 ${esc(p.name || '待定地点')} ${p.city? ' · '+esc(p.city):''}</div></div><span class="pill ${badgeClass(e.status,e.type)}">${esc(e.status)}</span></div><div class="eventMeta"><span class="pill">${esc(e.type)}</span><span class="pill">${esc(e.cost)}</span>${e.alarmMinutes?`<span class="pill">提前${e.alarmMinutes}分钟提醒</span>`:''}</div><div class="note">${esc(e.note)}</div><div class="eventActions"><button class="miniBtn blue" onclick="downloadIcs('${e.id}')">添加日历提醒</button>${p.id?`<button class="miniBtn green" onclick="scrollToPlace('${p.id}')">看地点攻略</button>`:''}${p.id?mapButtons(p):''}${np?`<button class="miniBtn orange" onclick="openAmapRoute('${np.id}')">去下一站：${esc(np.name)}</button>`:''}</div></div></div>`;
+  }).join('') || `<div class="card hint">没有匹配到行程。</div>`;
+}
+
+function renderCities(){
+  const cities=[...new Set(DATA.places.map(p=>p.city).filter(Boolean))];
+  $('cityFilter').innerHTML = '<option value="">全部城市</option>' + cities.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+function renderPlaces(){
+  const q=$('placeSearch').value.trim().toLowerCase(), city=$('cityFilter').value;
+  let list=DATA.places.filter(p=>!city || p.city===city);
+  if(q) list=list.filter(p=>[p.name,p.city,p.category,p.address,p.reason,p.bestTime,p.mapKeyword,...(p.tags||[])].join(' ').toLowerCase().includes(q));
+  $('placesBox').innerHTML=list.map(p=>`<div class="card" id="place-${esc(p.id)}"><div class="placeTitle"><div><div class="placeName">${esc(p.name)}</div><div class="placeAddress">${esc(p.address || p.mapKeyword || '')}</div></div><span class="pill">${esc(p.city)}</span></div><div class="tags">${(p.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div><div class="guideText"><b>推荐时间：</b>${esc(p.bestTime||'按行程安排')}</div><div class="guideText"><b>为什么去：</b>${esc(p.reason||'')}</div><ul class="bullet">${(p.guide||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="placeActions">${mapButtons(p)}<button class="miniBtn" onclick="copyText('${esc((p.mapKeyword||p.name).replace(/'/g,"\'"))}')">复制地点名</button></div></div>`).join('') || `<div class="card hint">没有匹配到地点。</div>`;
+}
+function mapButtons(p){ return `<button class="miniBtn blue" onclick="openTencent('${p.id}')">腾讯地图</button><button class="miniBtn green" onclick="openAmap('${p.id}')">高德地图</button>`; }
+function scrollToPlace(id){ document.querySelector('#places').scrollIntoView({behavior:'smooth'}); setTimeout(()=>{ const el=$('place-'+id); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.style.outline='3px solid #38bdf8'; setTimeout(()=>el.style.outline='',1600); } },300); }
+function openTencent(id){ const p=PLACE_MAP[id]; if(!p)return; const name=encodeURIComponent(p.mapKeyword||p.name); const addr=encodeURIComponent(p.address||''); let url; if(p.latitude&&p.longitude) url=`https://apis.map.qq.com/uri/v1/marker?marker=coord:${p.latitude},${p.longitude};title:${name};addr:${addr}&referer=trip_web`; else url=`https://apis.map.qq.com/uri/v1/search?keyword=${name}&region=${encodeURIComponent(p.city||'')}&referer=trip_web`; window.open(url,'_blank'); }
+function openAmap(id){ const p=PLACE_MAP[id]; if(!p)return; const name=encodeURIComponent(p.mapKeyword||p.name); let url; if(p.latitude&&p.longitude) url=`https://uri.amap.com/marker?position=${p.longitude},${p.latitude}&name=${name}&src=trip_web&coordinate=gaode&callnative=1`; else url=`https://uri.amap.com/search?keyword=${name}&city=${encodeURIComponent(p.city||'')}&src=trip_web&callnative=1`; window.open(url,'_blank'); }
+function openAmapRoute(id){ const p=PLACE_MAP[id]; if(!p)return openAmap(id); const name=encodeURIComponent(p.name); if(p.latitude&&p.longitude) window.open(`https://uri.amap.com/navigation?to=${p.longitude},${p.latitude},${name}&mode=car&policy=1&src=trip_web&coordinate=gaode&callnative=1`,'_blank'); else openAmap(id); }
+
+function getChecks(){ try{ return JSON.parse(localStorage.getItem('tripChecks')||'{}'); }catch(e){return {};} }
+function setChecks(v){ localStorage.setItem('tripChecks', JSON.stringify(v)); }
+function renderChecklist(){ const s=getChecks(); $('checklistBox').innerHTML=DATA.checklist.map(item=>`<label class="checkItem ${s[item.id]?'done':''}"><input type="checkbox" ${s[item.id]?'checked':''} onchange="toggleCheck('${item.id}',this.checked)"><span><b class="category">${esc(item.category)}</b>${esc(item.text)}</span></label>`).join(''); }
+function toggleCheck(id,checked){ const s=getChecks(); s[id]=checked; setChecks(s); renderChecklist(); }
+function resetChecklist(){ localStorage.removeItem('tripChecks'); renderChecklist(); toast('清单已重置'); }
+
+function dtToICS(iso){ const d=new Date(iso); const pad=n=>String(n).padStart(2,'0'); return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z'; }
+function icsEscape(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;'); }
+function eventToIcs(e){ const p=PLACE_MAP[e.placeId]||{}; return [`BEGIN:VEVENT`,`UID:${e.id}@trip-web`,`DTSTAMP:${dtToICS(new Date().toISOString())}`,`DTSTART:${dtToICS(e.startISO)}`,`DTEND:${dtToICS(e.endISO)}`,`SUMMARY:${icsEscape(e.title)}`,`LOCATION:${icsEscape(p.name||p.address||'')}`,`DESCRIPTION:${icsEscape(e.note+'\n'+(p.address||''))}`,`BEGIN:VALARM`,`TRIGGER:-PT${e.alarmMinutes||20}M`,`ACTION:DISPLAY`,`DESCRIPTION:${icsEscape('旅行提醒：'+e.title)}`,`END:VALARM`,`END:VEVENT`].join('\r\n'); }
+function buildIcs(events){ return ['BEGIN:VCALENDAR','VERSION:2.0','CALSCALE:GREGORIAN','PRODID:-//Trip Web//May Day Trip//CN',...events.map(eventToIcs),'END:VCALENDAR'].join('\r\n'); }
+function downloadBlob(name, content, type='text/plain;charset=utf-8'){ const blob = content instanceof Blob ? content : new Blob([content],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1200); }
+function downloadIcs(id){ const e=DATA.events.find(x=>x.id===id); if(!e)return; downloadBlob(`${e.title.replace(/[\/:*?"<>|]/g,'_')}.ics`, buildIcs([e]), 'text/calendar;charset=utf-8'); toast('已生成日历文件，打开后加入手机日历'); }
+function downloadAllIcs(){ downloadBlob('五一江门茂名玉林全程日历提醒.ics', buildIcs(DATA.events), 'text/calendar;charset=utf-8'); toast('已生成全程日历文件'); }
+function copyHotelText(){ copyText('您好，我们预订了5月1日—5月3日两晚房间，但我们会在5月2日凌晨1点左右到店入住，请帮忙保留房间，不要取消，谢谢。'); }
+
+function renderReturnPlans(){ $('returnPlans').innerHTML=DATA.returnPlans.map(p=>`<div class="card"><div class="guideTitle">${esc(p.title)}</div><div class="guideText"><b>路线：</b>${esc(p.route)}</div><div class="guideText"><b>费用：</b>${esc(p.cost)}</div><div class="note">${esc(p.note)}</div></div>`).join(''); }
+
+const DB_NAME='tripDocsDB', STORE='docs';
+function openDB(){ return new Promise((resolve,reject)=>{ const req=indexedDB.open(DB_NAME,1); req.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE,{keyPath:'id'}); }; req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); }); }
+async function saveDocs(files){ if(!files||!files.length)return; const db=await openDB(); const tx=db.transaction(STORE,'readwrite'); const store=tx.objectStore(STORE); Array.from(files).forEach(file=>store.put({id:Date.now()+'-'+Math.random().toString(16).slice(2), name:file.name, type:file.type||'application/octet-stream', size:file.size, createdAt:new Date().toLocaleString(), blob:file})); tx.oncomplete=()=>{toast('文档已导入到本机浏览器'); $('docInput').value=''; renderDocs();}; }
+async function getDocs(){ const db=await openDB(); return new Promise((resolve,reject)=>{ const tx=db.transaction(STORE,'readonly'); const req=tx.objectStore(STORE).getAll(); req.onsuccess=()=>resolve(req.result||[]); req.onerror=()=>reject(req.error); }); }
+async function renderDocs(){ if(!window.indexedDB){ $('fileList').innerHTML='<div class="card hint">当前浏览器不支持本地文档数据库。</div>'; return; } const list=await getDocs().catch(()=>[]); $('fileList').innerHTML=list.length?list.map(f=>`<div class="fileItem"><div><b>${esc(f.name)}</b><div class="hint">${Math.ceil((f.size||0)/1024)} KB · ${esc(f.createdAt)}</div></div><div><button class="miniBtn blue" onclick="openDoc('${f.id}')">打开/下载</button><button class="miniBtn" onclick="deleteDoc('${f.id}')">删除</button></div></div>`).join(''):'<div class="card hint">还没有导入文档。你可以导入之前的 Word 攻略或 Excel 行程表。</div>'; }
+async function getDoc(id){ const db=await openDB(); return new Promise((resolve,reject)=>{ const tx=db.transaction(STORE,'readonly'); const req=tx.objectStore(STORE).get(id); req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); }); }
+async function openDoc(id){ const f=await getDoc(id); if(!f)return; const url=URL.createObjectURL(f.blob); const a=document.createElement('a'); a.href=url; a.download=f.name; a.target='_blank'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1500); }
+async function deleteDoc(id){ const db=await openDB(); const tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).delete(id); tx.oncomplete=()=>{toast('已删除文档记录'); renderDocs();}; }
+
+function makeQr(){ const v=$('qrInput').value.trim(); const box=$('qrPreview'); if(!v){ box.textContent='等待粘贴网址'; return; } box.innerHTML=`<img alt="二维码" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(v)}"><div class="hint" style="margin-top:8px">长按/右键保存二维码</div>`; }
+function copyCurrentUrl(){ copyText(location.href); }
+function initNavSpy(){ const links=[...document.querySelectorAll('.nav a')]; const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean); const onscroll=()=>{ let id='home'; secs.forEach(s=>{ if(s.getBoundingClientRect().top < 120) id=s.id; }); links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id)); }; document.addEventListener('scroll',onscroll,{passive:true}); onscroll(); }
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
